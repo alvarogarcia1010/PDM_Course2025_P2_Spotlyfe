@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.pdmcourse.spotlyfe.data.database.dao.PlaceDao
 import com.pdmcourse.spotlyfe.data.database.entities.PlaceEntity
 
 @Database(
@@ -12,6 +13,7 @@ import com.pdmcourse.spotlyfe.data.database.entities.PlaceEntity
   exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase() {
+  abstract fun placeDao(): PlaceDao
 
   companion object {
     @Volatile

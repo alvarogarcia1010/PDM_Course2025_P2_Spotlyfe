@@ -10,6 +10,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -24,17 +26,21 @@ import com.pdmcourse.spotlyfe.ui.layout.CustomFloatingButton
 import com.pdmcourse.spotlyfe.ui.layout.CustomTopBar
 
 @Composable
-fun SavedPlacesScreen() {
+fun SavedPlacesScreen(
+  onNewPlacePressed : () -> Unit = {},
+  placesViewModel: SavedPlacesViewModel = viewModel(factory = SavedPlacesViewModel.Factory),
+) {
 
-  val UCA = Place(
-    name = "Centro Monseñor Romero",
-    remark = "Marker in Centro Monseñor Romero",
-    latitude = 13.679024407659101,
-    longitude = -89.23578718993471,
-  )
+  val savePlaces by placesViewModel.savedPlaces.collectAsStateWithLifecycle(emptyList())
+
+  val initialPosition = if (savePlaces.isNotEmpty()) {
+    LatLng(savePlaces.first().latitude, savePlaces.first().longitude)
+  } else {
+    LatLng(13.679024407659101, -89.23578718993471)
+  }
 
   val cameraPositionState = rememberCameraPositionState {
-    position = CameraPosition.fromLatLngZoom(LatLng(UCA.latitude, UCA.longitude), 16f)
+    position = CameraPosition.fromLatLngZoom(initialPosition, 16f)
   }
 
   var uiSettings by remember {
@@ -46,7 +52,7 @@ fun SavedPlacesScreen() {
 
   Scaffold(
     topBar = { CustomTopBar() },
-    floatingActionButton = { CustomFloatingButton(onClick = {})}
+    floatingActionButton = { CustomFloatingButton(onClick = onNewPlacePressed)}
   ) { innerPadding ->
     Column(modifier = Modifier.padding(innerPadding)) {
 
@@ -56,11 +62,13 @@ fun SavedPlacesScreen() {
         properties = properties,
         uiSettings = uiSettings
       ) {
-        Marker(
-          state = MarkerState(position = LatLng(UCA.latitude, UCA.longitude)),
-          title = UCA.name,
-          snippet = UCA.remark
-        )
+        savePlaces.map { place ->
+          Marker(
+            state = MarkerState(position = LatLng(place.latitude, place.longitude)),
+            title = place.name,
+            snippet = place.remark
+          )
+        }
       }
     }
   }
