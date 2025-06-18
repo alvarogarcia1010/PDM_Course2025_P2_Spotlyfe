@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -50,13 +51,13 @@ fun NewPlaceScreen(
   ) { innerPadding ->
     Column( modifier = Modifier.padding(innerPadding)) {
       Column(modifier = Modifier.padding(16.dp)) {
-        TextField(
+        OutlinedTextField(
           value = name,
           onValueChange = { name = it },
           label = { Text("Name") },
           modifier = Modifier.fillMaxWidth()
         )
-        TextField(
+        OutlinedTextField(
           value = description,
           onValueChange = { description = it },
           label = { Text("Description") },
