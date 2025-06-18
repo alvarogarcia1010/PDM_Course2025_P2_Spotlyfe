@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -53,7 +54,8 @@ fun RegisterScreen(
         value = password,
         onValueChange = { password = it },
         label = { Text(text = "Contraseña") },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        visualTransformation = PasswordVisualTransformation()
       )
       Spacer(modifier = Modifier.height(16.dp))
 

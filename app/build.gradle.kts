@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.ksp)
+  alias(libs.plugins.google.services)
 }
 
 android {
@@ -55,6 +56,8 @@ dependencies {
   implementation(libs.room.ktx)
   implementation(libs.maps.compose)
   implementation(libs.androidx.material.icons.extended)
+  implementation(platform(libs.firebase.bom))
+  implementation(libs.firebase.analytics.ktx)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
