@@ -21,13 +21,13 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
-import com.pdmcourse.spotlyfe.data.model.Place
 import com.pdmcourse.spotlyfe.ui.layout.CustomFloatingButton
 import com.pdmcourse.spotlyfe.ui.layout.CustomTopBar
 
 @Composable
 fun SavedPlacesScreen(
   onNewPlacePressed : () -> Unit = {},
+  onLogoutPressed: () -> Unit = {},
   placesViewModel: SavedPlacesViewModel = viewModel(factory = SavedPlacesViewModel.Factory),
 ) {
 
@@ -50,9 +50,11 @@ fun SavedPlacesScreen(
     mutableStateOf(MapProperties(mapType = MapType.HYBRID))
   }
 
+
   Scaffold(
-    topBar = { CustomTopBar() },
+    topBar = { CustomTopBar(onLogoutPressed = { onLogoutPressed() })},
     floatingActionButton = { CustomFloatingButton(onClick = onNewPlacePressed)}
+
   ) { innerPadding ->
     Column(modifier = Modifier.padding(innerPadding)) {
 

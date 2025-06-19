@@ -58,6 +58,7 @@ dependencies {
   implementation(libs.androidx.material.icons.extended)
   implementation(platform(libs.firebase.bom))
   implementation(libs.firebase.analytics.ktx)
+  implementation(libs.firebase.auth.ktx)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)

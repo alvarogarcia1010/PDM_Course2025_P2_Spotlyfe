@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "48852530261",
+    "project_id": "que-peli",
+    "storage_bucket": "que-peli.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48852530261:android:b3a2b8d47e7bdeff3110dc",
+        "android_client_info": {
+          "package_name": "com.pdmcourse.spotlyfe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6BM9SJiKW2UDw10oSEmAg88SZVz8GzhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

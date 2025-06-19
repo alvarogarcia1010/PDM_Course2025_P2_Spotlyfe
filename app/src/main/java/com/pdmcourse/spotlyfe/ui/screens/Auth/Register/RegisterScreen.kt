@@ -13,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,14 +23,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun RegisterScreen(
   onRegisterSuccess: () -> Unit = {},
   onLoginPressed: () -> Unit = {},
+  viewModel: RegisterViewModel = viewModel(factory = RegisterViewModel.Factory)
 ) {
+
   var email by remember { mutableStateOf("") }
   var password by remember { mutableStateOf("") }
+
+  val loading by viewModel.loading.collectAsState()
 
   Scaffold { innerPadding ->
     Column(
@@ -60,14 +66,14 @@ fun RegisterScreen(
       Spacer(modifier = Modifier.height(16.dp))
 
       Button(
-        onClick = {onRegisterSuccess()},
-        enabled = true,
+        onClick = { viewModel.registerUser(email, password, onRegisterSuccess) },
+        enabled = !loading,
         modifier = Modifier
           .padding(top = 16.dp)
           .height(48.dp)
           .fillMaxWidth()
       ) {
-        Text(text = "Registrarse")
+        Text(text = if (loading) "Registrando..." else "Registrar")
       }
 
       Spacer(modifier = Modifier.height(8.dp))
