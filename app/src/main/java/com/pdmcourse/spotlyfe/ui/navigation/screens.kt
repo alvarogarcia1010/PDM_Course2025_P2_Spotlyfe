@@ -13,3 +13,6 @@ object SavedPlacesScreenNavigation
 
 @Serializable
 object NewPlaceScreenNavigation
+
+@Serializable
+object NewExperienceScreenNavigation

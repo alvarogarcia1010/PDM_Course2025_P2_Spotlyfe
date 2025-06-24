@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import com.pdmcourse.spotlyfe.ui.screens.Auth.AuthViewModel
 import com.pdmcourse.spotlyfe.ui.screens.Auth.Login.LoginScreen
 import com.pdmcourse.spotlyfe.ui.screens.Auth.Register.RegisterScreen
+import com.pdmcourse.spotlyfe.ui.screens.NewExperience.NewExperienceScreen
 import com.pdmcourse.spotlyfe.ui.screens.NewPlace.NewPlaceScreen
 import com.pdmcourse.spotlyfe.ui.screens.SavedPlaces.SavedPlacesScreen
 
@@ -56,6 +57,7 @@ fun MainNavigation(navController: NavHostController, authViewModel: AuthViewMode
     composable<SavedPlacesScreenNavigation> {
       SavedPlacesScreen(
         onNewPlacePressed = { navController.navigate(NewPlaceScreenNavigation) },
+        onNewExperiencePressed = { navController.navigate(NewExperienceScreenNavigation) },
         onLogoutPressed = {
           authViewModel.logout()
           navController.navigate(LoginScreenNavigation) {
@@ -66,6 +68,11 @@ fun MainNavigation(navController: NavHostController, authViewModel: AuthViewMode
     }
     composable<NewPlaceScreenNavigation> {
       NewPlaceScreen(
+        onBackPressed = { navController.popBackStack() }
+      )
+    }
+    composable<NewExperienceScreenNavigation> {
+      NewExperienceScreen(
         onBackPressed = { navController.popBackStack() }
       )
     }
